@@ -1,0 +1,51 @@
+﻿@*model IEnumerable<Movies.Models.Movie>*@
+
+@model IPagedList<Movies.Models.Movie>
+
+
+
+
+@*used flex  wrap to align offer  widgets *@
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="offer offer-radius offer-info" >
+                <div class="shape">
+                    <div class="shape-text">
+                        @Html.DisplayFor(modelItem => item.Rating)
+                    </div>
+                </div>
+                <div class="offer-content">
+                    
+
+                    <p>
+                        <img id="img_logo" alt="Logo" src=@Url.Content(Html.DisplayFor( modelItem => item.MovieImages.SingleOrDefault().ImageUrl).ToString()) class="img-thumbnail" width="152" height="118" />
+                        <br />
+                        <div class="offer-content-data">
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </div>
+                        
+                         Genre: @Html.DisplayFor(modelItem => item.Genre)  
+                        <br />
+                        Released on:@Html.DisplayFor(modelItem => item.ReleaseDate)
+                        <br />
+
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+
+    }
+
+</div>
+<div class="PageList" data-movies-target="#ReviewList">
+    @Html.PagedListPager(Model, pageNumber => Url.Action("Index", new { pageNumber, currentFilter = ViewBag.CurrentFilter }), PagedListRenderOptions.MinimalWithItemCountText)
+</div>

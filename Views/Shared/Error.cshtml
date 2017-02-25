@@ -1,0 +1,43 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+}
+
+<h1 class="text-danger">Error </h1>
+
+<div style="background-color: #A52A2A; color: White; height: 10px;">
+</div>
+<div style="background-color: #F5F5DC; color: White; height: 170px;">
+    <div >
+        <h3 class="text-danger">
+            Application Error:
+        </h3>
+        <h4 class="text-danger">
+            Sorry, an error occurred while processing your request.
+            @{
+                if (@Model != null && Model.Exception != null)
+                {
+                        @Model.Exception.Message
+                        <br />
+                       
+                }
+            }
+        </h4>
+
+        <h6>
+            <a href="@Url.Action("Index", "Home")" class="btn btn-warning">
+                
+                <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+            </a>
+            
+        </h6>
+        <br />
+        FileName :@ViewBag.FileName
+        <br />
+      
+    </div>
+</div>
+<div style="background-color: #A52A2A; color: White; height: 20px;">
+</div>  
+ 

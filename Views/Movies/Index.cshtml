@@ -1,0 +1,63 @@
+﻿@*model IEnumerable<Movies.Models.Movie>*@
+@model IPagedList<Movies.Models.Movie>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section header
+{
+
+    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>  We are showing @Model.Count() movie reviews.
+}
+
+<h2>Movies Review List</h2>
+<!-- data-movies-search="@Url.Action("AutoComplete")"-->
+<p>
+    @using (Ajax.BeginForm(new AjaxOptions
+    {
+        HttpMethod = "get",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "ReviewList"
+    })) 
+
+    {
+
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="input-group">
+                
+                    <input class="form-control" id="search" name="search"  type="text" 
+                           
+                           value="@ViewBag.CurrentFilter"/>
+                           
+
+
+                    <div class="input-group-btn">
+                        <button type="submit" class="btn btn-default">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    }
+
+
+
+</p>
+
+<br />
+<p>
+    @Html.ActionLink("Add Movie", "Create")
+
+</p>
+
+@Html.Partial("_SearchView",Model)
+
+

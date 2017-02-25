@@ -1,0 +1,53 @@
+﻿@model IPagedList<Movies.Models.Movie>
+@{
+    ViewBag.Title = "Top Movies Index";
+}
+
+<div class="panel panel-info ">
+    <div class="panel-heading ">Top Movies </div>
+    <div class="panel-body">
+
+ @*using (Html.BeginForm())*@
+
+@using (Ajax.BeginForm(new AjaxOptions
+{
+    HttpMethod = "get",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "ReviewList"
+}))
+
+
+{
+            @Html.AntiForgeryToken()
+
+            @Html.DropDownList("Genre", (List<SelectListItem>)ViewBag.SelectList,
+                          htmlAttributes: new
+                          {
+                              @class = "btn btn-default",
+                              @value = ViewBag.CurrentFilter
+                          })
+
+            <button type="submit" class="btn btn-default" name="Top Movies">Get Top Movies</button>
+
+
+
+}
+
+
+        <br>
+        @*@if (ViewBag != null && ViewBag.SelectedGenre != null)
+            { @ViewBag.SelectedGenre }*@
+
+    </div>
+
+
+
+    @if (Model != null)
+    {
+
+        @Html.Partial("_TopMoviesView", Model)
+    }
+
+
+
+</div>
